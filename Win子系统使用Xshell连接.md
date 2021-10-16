@@ -14,7 +14,7 @@
 
 > 在子系统默认命令端输入 ```ifconfig``` 即可查看子系统的内网 ip
 
-![子系统查看ip](![子系统查看ip.jpg](https://i.loli.net/2021/10/16/1sfibae2CQHLWul.jpg))
+![子系统查看ip.jpg](https://i.loli.net/2021/10/16/1sfibae2CQHLWul.jpg)
 
 ### 配置 SSH 服务
 
