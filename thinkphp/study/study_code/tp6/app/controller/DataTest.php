@@ -155,4 +155,21 @@ class DataTest extends BaseController
         $users = Db::name('user')->where('create_time', 'not between', '2021-11-25 21:50:00,2021-11-26 21:50:51')->select();
         return json($users);
     }
+    public function poly()
+    {
+        // $result = Db::name('user')->count();
+        // $result = Db::name('user')->count('uid');
+        // return Db::getLastSql();
+        // $result = Db::name('user')->max('price');
+        // $result = Db::name('user')->min('price');
+        // $result = Db::name('user')->min('email', false);
+        // $result = Db::name('user')->avg('price');
+        // $result = Db::name('user')->sum('price');
+        // return json($result);
+        // $result = Db::name('user')->fetchSql(true)->select();
+        // $result = Db::name('user')->buildSql(true);
+        // $result = Db::query('SELECT * FROM tp_user');
+        $result = Db::execute('UPDATE tp_user SET username="ADMIN" WHERE id = 4');
+        return json($result);
+    }
 }
