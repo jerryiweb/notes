@@ -172,4 +172,30 @@ class DataTest extends BaseController
         $result = Db::execute('UPDATE tp_user SET username="ADMIN" WHERE id = 4');
         return json($result);
     }
+    public function linkUp()
+    {
+        // $user = Db::name('user')->where('id', '>', '6')->select();
+        // return json($user);
+        // 关联数组查询
+        // $user = Db::name('user')->where([
+        //     'gender' => '男',
+        //     'price' => 120
+        // ])->select();
+        // 数组内数组
+        // $user = Db::name('user')->where([
+        //     ['gender', '=', '男'],
+        //     ['price', '<', '120']
+        // ])->select();
+        // 数组拼接
+        // $map[] = ['gender', '=', '男'];
+        // $map[] = ['price', 'in', [60, 80, 120]];
+        // $user = Db::name('user')->where($map)->select();
+        // 字符串形式
+        // $user = Db::name('user')->whereRaw('gender = "男" AND price IN (60, 80, 120)')->select();
+        // $users = Db::name('user')->field('id, username as name, email')->select();
+        // return Db::getLastSql();
+        // $users = Db::name('user')->fieldRaw('id, SUM(price)')->select();
+        $users = Db::name('user')->field(true)->select();
+        return json($users);
+    }
 }
