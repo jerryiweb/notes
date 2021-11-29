@@ -265,4 +265,34 @@ class DataTest extends BaseController
         $users = Db::name('user')->fieldRaw('gender, SUM(price)')->group('gender')->having('SUM(price)<600')->select();
         return json($users);
     }
+    public function advanced()
+    {
+        // $users = Db::name('user')->select();
+        // return json($users);
+        // 1
+        // $users = Db::name('user')
+        //     ->where('username|email', 'like', '%ww%')
+        //     ->where('price&uid', '>', 0)
+        //     ->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        // 2
+        // $users = Db::name('user')->where([
+        //     ['id', '>', 0],
+        //     ['status', '=', 1],
+        //     ['price', '>=', 90],
+        //     ['email', 'like', '%ww%']
+        // ])->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        // 3
+        $users = Db::name('user')->where([
+            ['status', '=', 1],
+            ['price', 'exp', Db::raw('>80')]
+        ])->select();
+        return Db::getLastSql();
+        return json($users);
+    }
 }
