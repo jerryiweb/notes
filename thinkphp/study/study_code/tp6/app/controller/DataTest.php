@@ -203,4 +203,66 @@ class DataTest extends BaseController
         $users = Db::name('user')->alias('a')->select();
         return Db::getLastSql();
     }
+    public function linkdown()
+    {
+        /**
+         * limit
+         */
+
+        // 1
+        // $users = Db::name('user')->limit(0, 5)->select();
+        // return json($users);
+        // 2
+        // $users = Db::name('user')->limit(2, 5)->select();
+        // return json($users);
+        // 3
+        // $users = Db::name('user')->limit(0, 5)->select();
+        // $users = Db::name('user')->limit(5, 5)->select();
+        // return json($users);
+
+        /**
+         * page
+         */
+
+        // 1
+        // $users = Db::name('user')->page(1, 5)->select();
+        // $users = Db::name('user')->page(2, 5)->select();
+        // return json($users);
+
+        /**
+         * order
+         */
+
+        // 1
+        // $users = Db::name('user')->order('id', 'desc')->select();
+        // return json($users);
+        // 2
+        // $users = Db::name('user')->order(['create_time' => 'desc', 'price' => 'asc'])->select();
+        // return Db::getLastSql();
+        // return json($users);
+        // 3
+        // $users = Db::name('user')->orderRaw('FIELD(username, "jerryiweb") DESC')->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        /**
+         * group
+         */
+
+        // 1
+        // $users = Db::name('user')->field('gender, SUM(price)')->group('gender')->select();
+        // return json($users);
+        // 2
+        // $users = Db::name('user')->fieldRaw('gender, SUM(price)')->group('gender, password')->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        /**
+         * having
+         */
+
+        // 1
+        $users = Db::name('user')->fieldRaw('gender, SUM(price)')->group('gender')->having('SUM(price)<600')->select();
+        return json($users);
+    }
 }
