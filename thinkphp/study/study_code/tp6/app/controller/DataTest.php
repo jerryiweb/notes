@@ -55,20 +55,22 @@ class DataTest extends BaseController
     public function insert()
     {
         $data = [
-            'id' => 10,
+            'id' => 15,
             'username' => 'jerryiweb',
             'password' => 'adfasdf',
             'email' => 'admin@ww.com',
             'gender' => '男',
             'price' => 120,
             'details' => 'adfsadf',
-            'uid' => 1004,
+            'uid' => 1015,
             'status' => 1,
             'list' => 'null',
             'delete_time' => '2021-11-27 22:11:59',
             'update_time' => '2021-11-27 22:11:59',
             'create_time' => '2021-11-27 22:11:59',
         ];
+        // return Db::name('user')->field('username, password, email')->insert($data);
+        // return Db::name('user')->insert($data);
         // Db::name('user')->replace()->insert($data);
         // return Db::getLastSql();
         // return Db::name('user')->insertGetId($data);
@@ -195,7 +197,10 @@ class DataTest extends BaseController
         // $users = Db::name('user')->field('id, username as name, email')->select();
         // return Db::getLastSql();
         // $users = Db::name('user')->fieldRaw('id, SUM(price)')->select();
-        $users = Db::name('user')->field(true)->select();
-        return json($users);
+        // $users = Db::name('user')->field(true)->select();
+        // $users = Db::name('user')->withoutField('details')->select();
+        // return json($users);
+        $users = Db::name('user')->alias('a')->select();
+        return Db::getLastSql();
     }
 }
