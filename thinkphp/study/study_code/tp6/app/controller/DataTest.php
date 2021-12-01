@@ -346,6 +346,37 @@ class DataTest extends BaseController
 
         // return json(Db::name('user')->getByEmail('admin@jerryiweb.com'));
 
-        return json(Db::name('user')->getFieldByEmail('admin@jerryiweb.com', 'username'));
+        // return json(Db::name('user')->getFieldByEmail('admin@jerryiweb.com', 'username'));
+
+        $user = Db::name('user')->when(true, function ($query) {
+            $query->where('price', '>', 110);
+        }, function ($query) {
+            $query->where('username', 'like', '%jerry%');
+        })->select();
+        return json($user);
+    }
+    public function transation()
+    {
+        // 自动
+        // Db::Transaction(function () {
+        //     Db::name('user')->where('id', 1)->save(['price' => Db::raw('price + 3')]);
+        //     Db::name('user1')->where('id', 2)->save(['price' => Db::raw('price - 3')]);
+        // });
+
+        // 手动
+        // Db::startTrans();
+        // try {
+        //     Db::name('user')->where('id', 1)->save(['price' => Db::raw('price + 3')]);
+        //     Db::name('user1')->where('id', 2)->save(['price' => Db::raw('price - 3')]);
+        //     Db::commit();
+        // } catch (\Exception $e) {
+        //     dump($e);
+        //     Db::rollback();
+        // }
+
+        $users = Db::name('user')->withAttr('email', function ($value, $data) {
+            return strtoupper($value);
+        })->select();
+        return json($users);
     }
 }
