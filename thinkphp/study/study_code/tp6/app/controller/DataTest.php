@@ -288,11 +288,64 @@ class DataTest extends BaseController
         // return json($users);
 
         // 3
-        $users = Db::name('user')->where([
-            ['status', '=', 1],
-            ['price', 'exp', Db::raw('>80')]
-        ])->select();
-        return Db::getLastSql();
+        // $users = Db::name('user')->where([
+        //     ['status', '=', 1],
+        //     ['price', 'exp', Db::raw('>80')]
+        // ])->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        // 4
+        // $map = [
+        //     ['id', '>', 0],
+        //     ['price', 'exp', Db::raw('>=80')],
+        //     ['email', 'like', '%ww%'],
+        // ];
+        // $users = Db::name('user')->where([$map])->where('status', 1)->select();
+        // return Db::getLastSql();
+
+        // 5
+        // $map1 = [
+        //     ['username', 'like', '%iwe%'],
+        //     ['email', 'like', '%ww%']
+        // ];
+        // $map2 = [
+        //     ['username', 'like', 'jerry%'],
+        //     ['email', 'like', 'admin%']
+        // ];
+        // $users = Db::name('user')->whereOr([$map1, $map2])->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        // 6
+        // $users = Db::name('user')->whereRaw('(username LIKE "%ww%" AND email LIKE "admin%") OR (price > 80)')->select();
+        // return json($users);
+
+        // 7
+        // $users = Db::name('user')->where(function ($query) {
+        //     $query->where('id', '>', 10);
+        // })->whereOr(function ($query) {
+        //     $query->where('username', 'like', '%ww%');
+        // })->select();
+        // return json($users);
+
+
+        // 8
+        $users = Db::name('user')->whereRaw('(username LIKE :username AND email LIKE :email) OR (price > :price)', ['username' => '%erry%', 'email' => '%ww%', 'price' => 80])->select();
         return json($users);
+    }
+    public function quick()
+    {
+        // $users = Db::name('user')->whereColumn('update_time', '>', 'create_time')->select();
+        // return Db::getLastSql();
+        // return json($users);
+
+        // $user = Db::name('user')->whereEmail('admin@jerryiweb.com')->find();
+        // $user = Db::name('user')->whereUsername('jerryiweb')->find();
+        // return json($user);
+
+        // return json(Db::name('user')->getByEmail('admin@jerryiweb.com'));
+
+        return json(Db::name('user')->getFieldByEmail('admin@jerryiweb.com', 'username'));
     }
 }
