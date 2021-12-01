@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\model\User as UserModel;
+use think\facade\Db;
 
 class DataModel
 {
@@ -50,5 +51,42 @@ class DataModel
     {
         $user = UserModel::find(18);
         dump($user->delete());
+    }
+    public function update()
+    {
+        // $user = UserModel::find(15);
+        // $user->username = '李黑';
+        // $user->password = 'lihei';
+        // $user->save();
+
+        // $user = UserModel::where('username', '李白')->find();
+        // $user->username = '李白';
+        // $user->password = 'libai123';
+        // $user->price = Db::raw('price + 3');
+        // $user->allowField(['username', 'password'])->save();
+
+        // $list = [
+        //     ['id' => 8, 'username' => 'user8', 'password' => md5('user8')],
+        //     ['id' => 7, 'username' => 'user7', 'password' => md5('user7')],
+        //     ['id' => 9, 'username' => 'user9', 'password' => md5('user9')],
+        // ];
+        // $user = new UserModel();
+        // $user->saveAll($list);
+
+        // UserModel::update([
+        //     'id' => 6,
+        //     'username' => 'user6',
+        //     'password' => md5('user6')
+        // ]);
+
+        // UserModel::update([
+        //     'username' => 'user666',
+        //     'password' => md5('user666')
+        // ], ['id' => 6]);
+
+        UserModel::update([
+            'username' => 'user777',
+            'password' => 'user777'
+        ], ['id' => 7], ['username', 'password']);
     }
 }
