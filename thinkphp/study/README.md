@@ -5,3 +5,5 @@
 > 实际上与视频中的 markdown 教案没有太大区别
 >
 > 地址： https://www.bilibili.com/video/BV12E411y7u8
+
+**跟着敲一遍，复习完了再自己总结一遍，另外写一份笔记**
