@@ -89,4 +89,54 @@ class DataModel
             'password' => 'user777'
         ], ['id' => 7], ['username', 'password']);
     }
+    public function select()
+    {
+        // $user = UserModel::find(17);
+        // return json($user);
+
+        // $user = UserModel::findOrEmpty(155);
+        // return json($user);
+
+        // $user = UserModel::select([5, 16, 17, 18]);
+        // $user = UserModel::select();
+        // return json($user);
+
+        // $user = UserModel::where('status', 1)->limit(6)->order('id', 'desc')->select();
+        // return json($user);
+
+        // $user = UserModel::where('id', 17)->value('username');
+
+        // $user = UserModel::whereIn('id', [4, 5, 11, 17])->column('username', 'id');
+        // return json($user);
+
+        // $user = UserModel::getByUsername('admin');
+        // return json($user);
+
+        // return json(UserModel::max('price'));
+
+        // UserModel::chunk(5, function ($users) {
+        //     foreach ($users as $user) {
+        //         echo $user->username;
+        //     };
+        //     echo '<br>----<br>';
+        // });
+
+        foreach (UserModel::where('status', 1)->cursor() as $user) {
+            echo $user->username;
+        };
+    }
+    public function field()
+    {
+        // UserModel::select();
+        // Db::name('user')->select();
+
+        // $user = UserModel::find(17);
+        // echo $user->username;
+        // echo $user['email'];
+        // echo '<br>';
+        // echo $user->CreateTime;
+
+        // $user = new UserModel();
+        // echo $user->getUsername(1);
+    }
 }
